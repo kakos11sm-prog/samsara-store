@@ -198,6 +198,7 @@
     qs('[name="email"]').value = state.site.email || '';
     qs('[name="phone"]').value = state.site.phone || '';
     qs('[name="city"]').value = state.site.city || '';
+    if (qs('[name="telegram"]')) qs('[name="telegram"]').value = state.site.telegram || '';
   }
 
   function updateToolbar() {
@@ -692,7 +693,8 @@
       heroText: qs('[name="heroText"]').value.trim(),
       email: qs('[name="email"]').value.trim(),
       phone: qs('[name="phone"]').value.trim(),
-      city: qs('[name="city"]').value.trim()
+      city: qs('[name="city"]').value.trim(),
+      telegram: (qs('[name="telegram"]') && qs('[name="telegram"]').value.trim().replace(/^@/, '')) || state.site.telegram || ''
     };
 
     saveStore('Update site settings', status).catch(function (error) {

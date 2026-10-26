@@ -28,6 +28,7 @@ collections:
               - { label: Email, name: email, widget: string }
               - { label: Телефон, name: phone, widget: string }
               - { label: Город, name: city, widget: string }
+              - { label: Telegram поддержки, name: telegram, widget: string, required: false, hint: "username без @" }
 
           - label: Категории
             name: categories

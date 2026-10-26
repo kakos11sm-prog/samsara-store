@@ -124,12 +124,107 @@
 
   function initEditorEntryPoints() {
     if (qs('.edit-fab')) return;
+    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    if (page === 'editor.html' || page.indexOf('admin') === 0) return;
     var fab = document.createElement('a');
     fab.className = 'edit-fab';
     fab.href = 'editor.html';
     fab.textContent = 'Редактор';
     fab.title = 'Редактировать магазин';
     document.body.appendChild(fab);
+  }
+
+  function initSupportWidget() {
+    if (qs('.support-dock')) return;
+    var page = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    if (page === 'editor.html' || page.indexOf('admin') === 0) return;
+
+    var site = store.site || {};
+    var telegram = String(site.telegram || '').replace(/^@/, '').trim();
+    var telegramUrl = telegram ? 'https://t.me/' + encodeURIComponent(telegram) : 'https://t.me/';
+    var email = site.email || 'hello@samsara.store';
+
+    var dock = document.createElement('div');
+    dock.className = 'support-dock';
+    dock.innerHTML =
+      '<div class="support-widgets">' +
+      '<div class="support-chat is-hidden" data-support-chat>' +
+      '<h3>Напишите нам</h3>' +
+      '<p>Оставьте сообщение — откроем Telegram или почту для отправки.</p>' +
+      '<textarea class="form-control" data-support-text placeholder="Здравствуйте! У меня вопрос по товару..."></textarea>' +
+      '<div class="support-chat-actions">' +
+      '<button type="button" class="btn btn-primary" data-support-send>Отправить</button>' +
+      '<button type="button" class="btn btn-ghost" data-support-close-chat>Закрыть</button>' +
+      '</div>' +
+      '</div>' +
+      '<div class="support-widget">' +
+      '<span class="support-label">Telegram</span>' +
+      '<a class="support-btn support-btn-telegram" href="' +
+      telegramUrl +
+      '" target="_blank" rel="noopener" aria-label="Telegram" data-support-telegram>' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.8 4.4c.3-.9-.5-1.6-1.3-1.3L2.9 9.5c-.9.3-.9 1.6.1 1.9l4.5 1.4 1.7 5.3c.3.9 1.5 1.1 2.1.4l2.5-2.7 4.6 3.4c.8.6 1.9.2 2.2-.8l3.2-13.9zM9.4 13.1l-.3 3.1 1.5-2.1 7.2-6.5-8.4 5.5z"/></svg>' +
+      '</a>' +
+      '</div>' +
+      '<div class="support-widget">' +
+      '<span class="support-label">Написать</span>' +
+      '<button type="button" class="support-btn support-btn-chat" aria-label="Написать сообщение" data-support-open-chat>' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H8l-4 3v-3H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm2 4v2h12V8H6zm0 4v2h8v-2H6z"/></svg>' +
+      '</button>' +
+      '</div>' +
+      '</div>' +
+      '<button type="button" class="support-toggle" aria-label="Техподдержка" data-support-toggle>' +
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8v2H3a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1a3 3 0 0 0 3 3h1a1 1 0 0 0 0-2H7a1 1 0 0 1-1-1v-1h3a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1H6v-2a6 6 0 1 1 12 0v2h-3a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h3v1a1 1 0 0 1-1 1h-1a1 1 0 0 0 0 2h1a3 3 0 0 0 3-3v-1h1a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-1v-2a8 8 0 0 0-8-8z"/></svg>' +
+      '</button>';
+
+    document.body.appendChild(dock);
+
+    var chat = qs('[data-support-chat]', dock);
+    var telegramBtn = qs('[data-support-telegram]', dock);
+
+    qs('[data-support-toggle]', dock).addEventListener('click', function () {
+      dock.classList.toggle('is-open');
+      if (!dock.classList.contains('is-open')) chat.classList.add('is-hidden');
+    });
+
+    qs('[data-support-open-chat]', dock).addEventListener('click', function () {
+      chat.classList.toggle('is-hidden');
+      if (!chat.classList.contains('is-hidden')) {
+        var area = qs('[data-support-text]', dock);
+        if (area) area.focus();
+      }
+    });
+
+    qs('[data-support-close-chat]', dock).addEventListener('click', function () {
+      chat.classList.add('is-hidden');
+    });
+
+    qs('[data-support-send]', dock).addEventListener('click', function () {
+      var text = (qs('[data-support-text]', dock).value || '').trim();
+      if (!text) {
+        qs('[data-support-text]', dock).focus();
+        return;
+      }
+      if (telegram) {
+        window.open(
+          'https://t.me/' + encodeURIComponent(telegram) + '?text=' + encodeURIComponent(text),
+          '_blank',
+          'noopener'
+        );
+      } else {
+        window.location.href =
+          'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent('Вопрос в Сансара') + '&body=' + encodeURIComponent(text);
+      }
+    });
+
+    if (!telegram) {
+      telegramBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        chat.classList.remove('is-hidden');
+        dock.classList.add('is-open');
+        qs('[data-support-text]', dock).placeholder = 'Укажите Telegram в настройках сайта или напишите сюда — отправим на email';
+        qs('[data-support-text]', dock).focus();
+      });
+    }
   }
 
   function renderCategoryGrid(target) {
@@ -722,6 +817,7 @@
   function boot() {
     initNav();
     initEditorEntryPoints();
+    initSupportWidget();
     updateCartCount(false);
     initHomePage();
     initCatalogPage();
