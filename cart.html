@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Корзина — Сансара</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Сансара</a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" data-nav>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a class="cart-link" href="cart.html">
+          Корзина
+          <span class="cart-count is-hidden" data-cart-count>0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main data-page="cart">
+    <div class="container page-hero">
+      <span class="section-eyebrow">Корзина</span>
+      <h1 class="section-title">Ваш заказ</h1>
+      <p class="section-text">Измените количество или удалите позицию — затем перейдите к оформлению.</p>
+    </div>
+
+    <section class="section" style="padding-top: 1.5rem;">
+      <div class="container">
+        <div class="empty-state is-hidden" data-cart-empty>
+          <h2>Корзина пуста</h2>
+          <p>Добавьте что-нибудь из каталога.</p>
+          <a class="btn btn-primary" href="catalog.html">В каталог</a>
+        </div>
+
+        <div class="cart-layout">
+          <div class="cart-list is-hidden" data-cart-list></div>
+
+          <aside class="cart-summary is-hidden" data-cart-summary>
+            <h2>Итого</h2>
+            <div class="summary-row">
+              <span>Товаров</span>
+              <span data-cart-items-count>0</span>
+            </div>
+            <div class="summary-row total">
+              <span>К оплате</span>
+              <span data-cart-total>0 ₴</span>
+            </div>
+            <a class="btn btn-primary btn-block" href="checkout.html">Оформить заказ</a>
+            <a class="btn btn-ghost btn-block" href="catalog.html" style="margin-top: 0.65rem;">Продолжить покупки</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Сансара</div>
+          <p class="footer-text">Магазин одежды с спокойным характером. Виртуальный набросок: корзина и заказ работают локально в браузере.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Разделы</h4>
+          <a href="catalog.html">Каталог</a>
+          <a href="about.html">О нас</a>
+          <a href="cart.html">Корзина</a>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <p>hello@samsara.store</p>
+          <p>+380 00 000 00 00</p>
+          <p>Киев · онлайн</p>
+        </div>
+      </div>
+      <div class="footer-bottom">© Сансара. Набросок магазина.</div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/store-defaults.js"></script>
+  <script src="js/store-loader.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

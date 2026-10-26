@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О нас — Сансара</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Сансара</a>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" data-nav>
+        <a href="index.html">Главная</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="about.html">О нас</a>
+        <a class="cart-link" href="cart.html">
+          Корзина
+          <span class="cart-count is-hidden" data-cart-count>0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container page-hero">
+      <span class="section-eyebrow">О нас</span>
+      <h1 class="section-title">Круг вещей, которые носят дальше</h1>
+    </div>
+
+    <section class="section" style="padding-top: 1.5rem;">
+      <div class="container about-layout">
+        <div class="about-visual" aria-hidden="true">Сансара</div>
+        <div class="about-copy">
+          <p>Сансара — магазин одежды с простой идеей: вещи должны переживать сезоны вместе с вами. Мы собираем ботинки, шапки, кофты, куртки и перчатки в одном месте, без лишнего шума.</p>
+          <p>Этот сайт — рабочий набросок витрины: можно листать категории, открывать карточки товаров, класть их в корзину и оформить виртуальный заказ. Оплата и склад пока не подключены — только фронт и локальная корзина в браузере.</p>
+          <p>Если направление нравится, дальше можно добавить фото товаров, реальную оплату и доставку.</p>
+          <p style="margin-top: 1.75rem;">
+            <a class="btn btn-primary" href="catalog.html">Перейти в каталог</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Сансара</div>
+          <p class="footer-text">Магазин одежды с спокойным характером. Виртуальный набросок: корзина и заказ работают локально в браузере.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Разделы</h4>
+          <a href="catalog.html">Каталог</a>
+          <a href="about.html">О нас</a>
+          <a href="cart.html">Корзина</a>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <p>hello@samsara.store</p>
+          <p>+380 00 000 00 00</p>
+          <p>Киев · онлайн</p>
+        </div>
+      </div>
+      <div class="footer-bottom">© Сансара. Набросок магазина.</div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/store-defaults.js"></script>
+  <script src="js/store-loader.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

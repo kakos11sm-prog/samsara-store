@@ -1,0 +1,71 @@
+backend:
+  name: github
+  repo: kakos11sm-prog/samsara-store
+  branch: main
+
+# Локальная админка без интернета: npm run admin
+local_backend: true
+
+media_folder: media/products
+public_folder: /media/products
+
+locale: ru
+
+collections:
+  - name: shop
+    label: Магазин
+    files:
+      - file: data/store.json
+        name: store
+        label: Товары и категории
+        fields:
+          - label: Сайт
+            name: site
+            widget: object
+            fields:
+              - { label: Бренд, name: brand, widget: string }
+              - { label: Слоган, name: tagline, widget: string }
+              - { label: Текст на главной, name: heroText, widget: text }
+              - { label: Email, name: email, widget: string }
+              - { label: Телефон, name: phone, widget: string }
+              - { label: Город, name: city, widget: string }
+
+          - label: Категории
+            name: categories
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: ID, name: id, widget: string, hint: "boots, hat, sweater, jacket, gloves" }
+              - { label: Название, name: name, widget: string }
+              - { label: Описание, name: blurb, widget: string }
+              - { label: Символ, name: symbol, widget: string, required: false }
+              - { label: Градиент CSS, name: gradient, widget: string, required: false }
+              - { label: Видео (путь), name: video, widget: string, required: false, hint: "media/hat.mp4" }
+
+          - label: Товары
+            name: products
+            widget: list
+            summary: "{{fields.name}} — {{fields.price}} ₴"
+            fields:
+              - { label: ID, name: id, widget: string, hint: "латиница, например hat-wool" }
+              - label: Категория
+                name: category
+                widget: select
+                options: ["boots", "hat", "sweater", "jacket", "gloves"]
+              - { label: Название, name: name, widget: string }
+              - { label: Цена (₴), name: price, widget: number, value_type: int }
+              - { label: Описание, name: description, widget: text }
+              - label: Размеры
+                name: sizes
+                widget: list
+                field: { label: Размер, name: size, widget: string }
+              - { label: Символ, name: symbol, widget: string, required: false }
+              - { label: Главное фото, name: image, widget: image, required: false }
+              - label: Цвета / доп. фото
+                name: images
+                widget: list
+                required: false
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: Фото, name: src, widget: image }
+                  - { label: Цвет / подпись, name: label, widget: string }
