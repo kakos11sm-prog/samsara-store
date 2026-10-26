@@ -74,6 +74,30 @@
     };
   }
 
+  var CATEGORY_NAMES = {
+    boots: 'Ботинки',
+    hat: 'Шапка',
+    sweater: 'Кофта',
+    jacket: 'Куртка',
+    gloves: 'Перчатки'
+  };
+
+  function categoryLabel(id) {
+    return CATEGORY_NAMES[id] || id;
+  }
+
+  function updatePreviewLink(product) {
+    var link = qs('[data-preview-product]');
+    if (!link) return;
+    if (product && product.id) {
+      link.href = 'product.html?id=' + encodeURIComponent(product.id);
+      link.classList.remove('is-hidden');
+    } else {
+      link.href = 'catalog.html';
+      link.classList.add('is-hidden');
+    }
+  }
+
   function renderList() {
     var list = qs('[data-product-list]');
     list.innerHTML = state.products
@@ -92,7 +116,7 @@
           product.name +
           '</strong>' +
           '<small>' +
-          product.category +
+          categoryLabel(product.category) +
           ' · ' +
           product.price +
           ' ₴</small>' +
@@ -113,7 +137,7 @@
 
   function fillProduct(product) {
     state.currentId = product ? product.id : null;
-    qs('[data-product-heading]').textContent = product ? product.name : 'Новый товар';
+    qs('[data-product-heading]').textContent = product ? 'Товар: ' + product.name : 'Новый товар';
     qs('[name="id"]').value = product ? product.id : '';
     qs('[name="id"]').disabled = Boolean(product);
     qs('[name="category"]').value = product ? product.category : 'hat';
@@ -123,6 +147,7 @@
     qs('[name="sizes"]').value = product && product.sizes ? product.sizes.join(', ') : '';
     qs('[name="image"]').value = product ? product.image || '' : '';
     qs('[name="images"]').value = product ? imagesToText(product.images) : '';
+    updatePreviewLink(product);
     renderList();
   }
 
@@ -158,11 +183,12 @@
 
   function saveStore(message, statusEl) {
     if (!getToken()) {
-      setStatus(statusEl, 'Сначала сохраните GitHub token выше', true);
+      setStatus(statusEl, 'Сначала вставьте ключ доступа вверху и нажмите «Запомнить ключ»', true);
+      expandAuth(true);
       return Promise.reject(new Error('no token'));
     }
 
-    setStatus(statusEl, 'Сохраняю в GitHub...');
+    setStatus(statusEl, 'Сохраняю...');
     var body = {
       message: message,
       content: toBase64(pretty(rebuildStore())),
@@ -177,9 +203,9 @@
     })
       .then(function (response) {
         return response.json().then(function (data) {
-          if (!response.ok) throw new Error((data && data.message) || 'Ошибка сохранения');
+          if (!response.ok) throw new Error((data && data.message) || 'Не удалось сохранить. Проверьте ключ доступа.');
           state.sha = data.content && data.content.sha;
-          setStatus(statusEl, 'Сохранено. Сайт обновится на Netlify через 1–2 минуты.');
+          setStatus(statusEl, 'Готово. Через 1–2 минуты откройте сайт и обновите страницу.');
         });
       });
   }
@@ -188,7 +214,7 @@
     var status = qs('[data-product-status]');
     var product = readProductForm();
     if (!product.id || !product.name) {
-      setStatus(status, 'Укажите ID и название', true);
+      setStatus(status, 'Заполните код товара и название', true);
       return;
     }
 
@@ -280,29 +306,53 @@
       });
   }
 
+  function expandAuth(open) {
+    var panel = qs('[data-auth-panel]');
+    var toggle = qs('[data-auth-toggle]');
+    if (!panel || !toggle) return;
+    panel.classList.toggle('is-collapsed', !open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
   function updateAuthStatus() {
     var status = qs('[data-auth-status]');
+    var title = qs('[data-auth-title]');
     if (getToken()) {
-      qs('#token').placeholder = 'Token уже сохранён в браузере';
-      setStatus(status, 'Token найден. Можно сохранять.');
+      qs('#token').placeholder = 'Ключ уже сохранён в этом браузере';
+      if (title) title.textContent = 'Ключ доступа сохранён ✓';
+      setStatus(status, 'Можно сохранять товары и текст сайта.');
+      expandAuth(false);
     } else {
-      setStatus(status, 'Token ещё не сохранён', true);
+      if (title) title.textContent = '1. Ключ доступа (нужен один раз)';
+      setStatus(status, 'Без ключа сохранение не сработает', true);
+      expandAuth(true);
     }
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     updateAuthStatus();
 
+    qs('[data-auth-toggle]').addEventListener('click', function () {
+      var panel = qs('[data-auth-panel]');
+      expandAuth(panel.classList.contains('is-collapsed'));
+    });
+
     qs('[data-save-token]').addEventListener('click', function () {
       var value = qs('#token').value.trim();
       if (!value) {
-        setStatus(qs('[data-auth-status]'), 'Вставьте token', true);
+        setStatus(qs('[data-auth-status]'), 'Вставьте ключ в поле выше', true);
         return;
       }
       localStorage.setItem(TOKEN_KEY, value);
       qs('#token').value = '';
       updateAuthStatus();
       loadData().catch(function () {});
+    });
+
+    qs('[data-clear-token]').addEventListener('click', function () {
+      localStorage.removeItem(TOKEN_KEY);
+      updateAuthStatus();
+      setStatus(qs('[data-auth-status]'), 'Ключ удалён из браузера', true);
     });
 
     qs('[data-tab="settings"]').addEventListener('click', function () {

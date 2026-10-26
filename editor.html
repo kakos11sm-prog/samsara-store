@@ -12,8 +12,7 @@
     <div class="container header-inner">
       <a class="logo" href="index.html">Сансара</a>
       <nav class="nav" data-nav>
-        <a href="index.html">На сайт</a>
-        <a href="admin/">Decap CMS</a>
+        <a href="index.html">Смотреть сайт</a>
         <a href="editor.html" class="is-active">Редактор</a>
       </nav>
     </div>
@@ -22,51 +21,92 @@
   <main class="editor-main container">
     <div class="editor-hero">
       <h1>Редактор магазина</h1>
-      <p>Меняйте товары прямо здесь. Сохранение пишет в GitHub — сайт на Netlify обновится сам.</p>
+      <p>Слева выберите товар → справа измените → нажмите «Сохранить». Через 1–2 минуты изменения появятся на сайте.</p>
     </div>
 
-    <section class="editor-card" data-auth-panel>
-      <h2>Доступ к сохранению</h2>
-      <p class="editor-hint">Один раз вставьте GitHub token с правом писать в репозиторий <code>samsara-store</code>. Он хранится только в вашем браузере.</p>
-      <ol class="editor-steps">
-        <li>Откройте <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">Fine-grained tokens</a></li>
-        <li>Generate → выберите только репозиторий <strong>samsara-store</strong></li>
-        <li>Permissions → Repository → Contents: <strong>Read and write</strong></li>
-        <li>Скопируйте token и вставьте ниже</li>
-      </ol>
-      <div class="form-group">
-        <label for="token">GitHub token</label>
-        <input class="form-control" id="token" type="password" placeholder="github_pat_..." autocomplete="off">
+    <section class="editor-card editor-auth" data-auth-panel>
+      <button type="button" class="editor-auth-toggle" data-auth-toggle aria-expanded="true">
+        <span data-auth-title>1. Ключ доступа (нужен один раз)</span>
+        <span class="editor-auth-chevron">▾</span>
+      </button>
+      <div class="editor-auth-body" data-auth-body>
+        <p class="editor-hint">Это пароль для сохранения. Хранится только в вашем браузере, на сайт его никто не видит.</p>
+        <div class="editor-howto">
+          <p><strong>Как получить ключ:</strong></p>
+          <ol class="editor-steps">
+            <li>Откройте <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">страницу токенов GitHub</a></li>
+            <li>Создайте токен → репозиторий <strong>samsara-store</strong></li>
+            <li>Право <strong>Contents → Read and write</strong></li>
+            <li>Скопируйте и вставьте сюда</li>
+          </ol>
+        </div>
+        <div class="form-group">
+          <label for="token">Вставьте ключ сюда</label>
+          <input class="form-control" id="token" type="password" placeholder="начинается с github_pat_..." autocomplete="off">
+          <p class="field-hint">Не отправляйте ключ никому и не вставляйте его в чат.</p>
+        </div>
+        <button type="button" class="btn btn-primary" data-save-token>Запомнить ключ</button>
+        <button type="button" class="btn btn-ghost" data-clear-token>Удалить ключ из браузера</button>
+        <p class="editor-status" data-auth-status></p>
       </div>
-      <button type="button" class="btn btn-primary" data-save-token>Сохранить token в браузере</button>
-      <p class="editor-status" data-auth-status></p>
     </section>
 
     <div class="editor-layout">
       <aside class="editor-card editor-side">
-        <button type="button" class="btn btn-ghost btn-block" data-tab="settings">Настройки сайта</button>
-        <button type="button" class="btn btn-primary btn-block" data-new-product>+ Новый товар</button>
+        <p class="editor-side-label">Что правим</p>
+        <button type="button" class="btn btn-ghost btn-block" data-tab="settings">Текст на главной и контакты</button>
+        <button type="button" class="btn btn-primary btn-block" data-new-product>+ Добавить товар</button>
+        <p class="editor-side-label">Товары</p>
         <div class="editor-product-list" data-product-list></div>
       </aside>
 
       <section class="editor-card editor-form-wrap">
         <div data-panel="settings" class="is-hidden">
-          <h2>Настройки и категории</h2>
-          <div class="form-group"><label>Бренд</label><input class="form-control" name="brand"></div>
-          <div class="form-group"><label>Слоган</label><input class="form-control" name="tagline"></div>
-          <div class="form-group"><label>Текст на главной</label><textarea class="form-control" name="heroText" rows="3"></textarea></div>
-          <div class="form-group"><label>Email</label><input class="form-control" name="email"></div>
-          <div class="form-group"><label>Телефон</label><input class="form-control" name="phone"></div>
-          <div class="form-group"><label>Город</label><input class="form-control" name="city"></div>
-          <button type="button" class="btn btn-primary" data-save-settings>Сохранить настройки</button>
+          <h2>Текст на сайте</h2>
+          <p class="editor-hint">Эти поля видны посетителям на главной и в подвале.</p>
+
+          <div class="form-group">
+            <label>Название магазина</label>
+            <input class="form-control" name="brand" placeholder="Сансара">
+            <p class="field-hint">Крупная надпись в шапке и на главном экране.</p>
+          </div>
+          <div class="form-group">
+            <label>Короткий слоган</label>
+            <input class="form-control" name="tagline" placeholder="Одежда для нового круга">
+            <p class="field-hint">Строка под названием на главной.</p>
+          </div>
+          <div class="form-group">
+            <label>Описание на главной</label>
+            <textarea class="form-control" name="heroText" rows="3" placeholder="Несколько предложений о магазине"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Email для связи</label>
+            <input class="form-control" name="email" placeholder="hello@samsara.store">
+          </div>
+          <div class="form-group">
+            <label>Телефон</label>
+            <input class="form-control" name="phone" placeholder="+380...">
+          </div>
+          <div class="form-group">
+            <label>Город / адрес</label>
+            <input class="form-control" name="city" placeholder="Киев · онлайн">
+          </div>
+
+          <button type="button" class="btn btn-primary" data-save-settings>Сохранить текст сайта</button>
           <p class="editor-status" data-settings-status></p>
         </div>
 
         <div data-panel="product">
-          <h2 data-product-heading>Товар</h2>
-          <div class="form-group"><label>ID</label><input class="form-control" name="id" placeholder="hat-wool"></div>
+          <h2 data-product-heading>Карточка товара</h2>
+          <p class="editor-hint">Заполните поля как в обычной витрине. Фото кладите в папку <code>media/products</code> на GitHub, сюда пишите путь к файлу.</p>
+
           <div class="form-group">
-            <label>Категория</label>
+            <label>Код товара (латиницей)</label>
+            <input class="form-control" name="id" placeholder="hat-wool">
+            <p class="field-hint">Например: <code>hat-wool</code>. После создания менять нельзя.</p>
+          </div>
+          <div class="form-group">
+            <label>Раздел каталога</label>
             <select class="form-control" name="category">
               <option value="boots">Ботинки</option>
               <option value="hat">Шапка</option>
@@ -75,15 +115,38 @@
               <option value="gloves">Перчатки</option>
             </select>
           </div>
-          <div class="form-group"><label>Название</label><input class="form-control" name="name"></div>
-          <div class="form-group"><label>Цена (₴)</label><input class="form-control" name="price" type="number" min="0" step="1"></div>
-          <div class="form-group"><label>Описание</label><textarea class="form-control" name="description" rows="4"></textarea></div>
-          <div class="form-group"><label>Размеры через запятую</label><input class="form-control" name="sizes" placeholder="S, M, L"></div>
-          <div class="form-group"><label>Главное фото (путь)</label><input class="form-control" name="image" placeholder="media/products/hat-wool.jpg"></div>
-          <div class="form-group"><label>Цвета (каждый с новой строки: путь | подпись)</label><textarea class="form-control" name="images" rows="4" placeholder="media/products/hat-wool.jpg | Чёрная"></textarea></div>
+          <div class="form-group">
+            <label>Название для покупателя</label>
+            <input class="form-control" name="name" placeholder="Wool Orbit">
+          </div>
+          <div class="form-group">
+            <label>Цена в гривнах</label>
+            <input class="form-control" name="price" type="number" min="0" step="1" placeholder="890">
+          </div>
+          <div class="form-group">
+            <label>Описание</label>
+            <textarea class="form-control" name="description" rows="4" placeholder="Коротко, что это за вещь и кому подойдёт"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Размеры</label>
+            <input class="form-control" name="sizes" placeholder="S, M, L">
+            <p class="field-hint">Пишите через запятую. Пример: <code>S, M, L</code> или <code>39, 40, 41</code></p>
+          </div>
+          <div class="form-group">
+            <label>Главное фото</label>
+            <input class="form-control" name="image" placeholder="media/products/hat-wool.jpg">
+            <p class="field-hint">Путь к файлу, например: <code>media/products/hat-wool.jpg</code></p>
+          </div>
+          <div class="form-group">
+            <label>Другие цвета / фото</label>
+            <textarea class="form-control" name="images" rows="4" placeholder="media/products/hat-wool.jpg | Чёрная&#10;media/products/hat-wool-green.jpg | Зелёная"></textarea>
+            <p class="field-hint">Каждый цвет с новой строки: <code>путь_к_фото | Название цвета</code></p>
+          </div>
+
           <div class="editor-actions">
             <button type="button" class="btn btn-primary" data-save-product>Сохранить товар</button>
-            <button type="button" class="btn btn-danger" data-delete-product>Удалить</button>
+            <a class="btn btn-ghost" data-preview-product href="index.html" target="_blank" rel="noopener">Открыть на сайте</a>
+            <button type="button" class="btn btn-danger" data-delete-product>Удалить товар</button>
           </div>
           <p class="editor-status" data-product-status></p>
         </div>
