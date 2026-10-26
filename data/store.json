@@ -56,10 +56,22 @@
       "name": "Trail Ember",
       "price": 4890,
       "description": "Кожаные ботинки на прорезиненной подошве. Для города и коротких маршрутов вне асфальта.",
-      "sizes": ["39", "40", "41", "42", "43", "44"],
+      "sizes": [
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44"
+      ],
       "symbol": "Bt",
       "image": "media/products/boots-trail.jpg",
-      "images": []
+      "images": [
+        {
+          "src": "media/products/boots-trail.jpg",
+          "label": ""
+        }
+      ]
     },
     {
       "id": "boots-harbor",
@@ -67,7 +79,14 @@
       "name": "Harbor Soft",
       "price": 4290,
       "description": "Лёгкие ботинки с мягким воротником. Держат форму и не давят на щиколотку.",
-      "sizes": ["38", "39", "40", "41", "42", "43"],
+      "sizes": [
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43"
+      ],
       "symbol": "Bt",
       "image": "media/products/boots-harbor.jpg",
       "images": []
@@ -78,7 +97,14 @@
       "name": "North Cycle",
       "price": 5490,
       "description": "Утеплённая модель с мембраной. Спокойный силуэт, яркая подошва в тон акценту бренда.",
-      "sizes": ["40", "41", "42", "43", "44", "45"],
+      "sizes": [
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45"
+      ],
       "symbol": "Bt",
       "image": "media/products/boots-north.jpg",
       "images": []
@@ -89,12 +115,22 @@
       "name": "Wool Orbit",
       "price": 890,
       "description": "Плотная шерстяная шапка с едва заметным швом. Не чешется, хорошо сидит.",
-      "sizes": ["S", "M", "L"],
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
       "symbol": "Hp",
       "image": "media/products/hat-wool.jpg",
       "images": [
-        { "src": "media/products/hat-wool.jpg", "label": "Чёрная" },
-        { "src": "media/products/hat-wool-green.jpg", "label": "Зелёная" }
+        {
+          "src": "media/products/hat-wool.jpg",
+          "label": "Чёрная"
+        },
+        {
+          "src": "media/products/hat-wool-green.jpg",
+          "label": "Зелёная"
+        }
       ]
     },
     {
@@ -103,12 +139,20 @@
       "name": "Quiet Beanie",
       "price": 790,
       "description": "Классическая шапка с подворотом. Мягкий хлопок с лёгким начёсом внутри.",
-      "sizes": ["One size"],
+      "sizes": [
+        "One size"
+      ],
       "symbol": "Hp",
       "image": "media/products/hat-bean.jpg",
       "images": [
-        { "src": "media/products/hat-bean.jpg", "label": "Чёрная" },
-        { "src": "media/products/hat-bean-green.jpg", "label": "Зелёная" }
+        {
+          "src": "media/products/hat-bean.jpg",
+          "label": "Чёрная"
+        },
+        {
+          "src": "media/products/hat-bean-green.jpg",
+          "label": "Зелёная"
+        }
       ]
     },
     {
@@ -117,7 +161,12 @@
       "name": "Loop Knit",
       "price": 2490,
       "description": "Вязаная кофта свободного кроя. Дышит и держит тепло без тяжести.",
-      "sizes": ["S", "M", "L", "XL"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "symbol": "Kf",
       "image": "media/products/sweater-loop.jpg",
       "images": []
@@ -128,7 +177,12 @@
       "name": "Pulse Hoodie",
       "price": 2790,
       "description": "Худи с мягким флисом. Карман-кенгуру и аккуратный капюшон без лишних шнурков.",
-      "sizes": ["S", "M", "L", "XL"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "symbol": "Kf",
       "image": "media/products/sweater-pulse.jpg",
       "images": []
@@ -139,7 +193,13 @@
       "name": "River Crew",
       "price": 2190,
       "description": "Свитшот с круглым вырезом. Плотный футер, спокойный графитовый тон.",
-      "sizes": ["XS", "S", "M", "L", "XL"],
+      "sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "symbol": "Kf",
       "image": "media/products/sweater-river.jpg",
       "images": []
@@ -150,7 +210,12 @@
       "name": "Mist Shell",
       "price": 4590,
       "description": "Лёгкая куртка с водоотталкивающей пропиткой. Складывается компактно в свой карман.",
-      "sizes": ["S", "M", "L", "XL"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
       "symbol": "Kt",
       "image": "media/products/jacket-mist.jpg",
       "images": []
@@ -161,7 +226,13 @@
       "name": "Stone Field",
       "price": 5290,
       "description": "Утеплённая куртка на синтепоне. Длиннее обычной — закрывает поясницу на ветру.",
-      "sizes": ["S", "M", "L", "XL", "XXL"],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
       "symbol": "Kt",
       "image": "media/products/jacket-stone.jpg",
       "images": []
@@ -172,7 +243,11 @@
       "name": "Grip Soft",
       "price": 690,
       "description": "Перчатки с тачскрином на указательном пальце. Тонкие, но тёплые для города.",
-      "sizes": ["S", "M", "L"],
+      "sizes": [
+        "S",
+        "M",
+        "L"
+      ],
       "symbol": "Pr",
       "image": "media/products/gloves-grip.jpg",
       "images": []
@@ -183,7 +258,11 @@
       "name": "Forge Knit",
       "price": 840,
       "description": "Вязаные перчатки с усилием на ладони. Для велосипеда и прохладных прогулок.",
-      "sizes": ["M", "L", "XL"],
+      "sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
       "symbol": "Pr",
       "image": "media/products/gloves-forge.jpg",
       "images": []
