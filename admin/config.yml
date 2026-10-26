@@ -3,7 +3,6 @@ backend:
   repo: kakos11sm-prog/samsara-store
   branch: main
 
-# Локальная админка без интернета: npm run admin
 local_backend: true
 
 media_folder: media/products
@@ -35,19 +34,19 @@ collections:
             widget: list
             summary: "{{fields.name}}"
             fields:
-              - { label: ID, name: id, widget: string, hint: "boots, hat, sweater, jacket, gloves" }
+              - { label: ID, name: id, widget: string }
               - { label: Название, name: name, widget: string }
               - { label: Описание, name: blurb, widget: string }
               - { label: Символ, name: symbol, widget: string, required: false }
               - { label: Градиент CSS, name: gradient, widget: string, required: false }
-              - { label: Видео (путь), name: video, widget: string, required: false, hint: "media/hat.mp4" }
+              - { label: Видео (путь), name: video, widget: string, required: false }
 
           - label: Товары
             name: products
             widget: list
             summary: "{{fields.name}} — {{fields.price}} ₴"
             fields:
-              - { label: ID, name: id, widget: string, hint: "латиница, например hat-wool" }
+              - { label: ID, name: id, widget: string }
               - label: Категория
                 name: category
                 widget: select

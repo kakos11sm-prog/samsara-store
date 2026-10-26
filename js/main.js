@@ -114,6 +114,16 @@
     });
   }
 
+  function initEditorEntryPoints() {
+    if (qs('.edit-fab')) return;
+    var fab = document.createElement('a');
+    fab.className = 'edit-fab';
+    fab.href = 'editor.html';
+    fab.textContent = 'Редактор';
+    fab.title = 'Редактировать магазин';
+    document.body.appendChild(fab);
+  }
+
   function renderCategoryGrid(target) {
     if (!target) return;
     target.innerHTML = store.categories
@@ -190,7 +200,8 @@
   function renderProductCard(product) {
     var cat = store.getCategory(product.category);
     return (
-      '<a class="product-card" href="product.html?id=' +
+      '<article class="product-card">' +
+      '<a href="product.html?id=' +
       encodeURIComponent(product.id) +
       '">' +
       '<div class="product-card-media">' +
@@ -207,7 +218,11 @@
       store.formatPrice(product.price) +
       '</div>' +
       '</div>' +
-      '</a>'
+      '</a>' +
+      '<a class="inline-edit-link" href="editor.html?id=' +
+      encodeURIComponent(product.id) +
+      '">Изменить</a>' +
+      '</article>'
     );
   }
 
@@ -461,6 +476,9 @@
       '<button type="submit" class="btn btn-primary">В корзину</button>' +
       '<div class="add-feedback" data-add-feedback>Добавлено в корзину</div>' +
       '</form>' +
+      '<a class="inline-edit-link" href="editor.html?id=' +
+      encodeURIComponent(product.id) +
+      '">Изменить этот товар</a>' +
       '</div>';
 
     var gallery = qs('[data-product-gallery]', mount);
@@ -681,6 +699,7 @@
 
   function boot() {
     initNav();
+    initEditorEntryPoints();
     updateCartCount(false);
     initHomePage();
     initCatalogPage();

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Редактор — Сансара</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/editor.css">
+</head>
+<body class="editor-body">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html">Сансара</a>
+      <nav class="nav" data-nav>
+        <a href="index.html">На сайт</a>
+        <a href="admin/">Decap CMS</a>
+        <a href="editor.html" class="is-active">Редактор</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="editor-main container">
+    <div class="editor-hero">
+      <h1>Редактор магазина</h1>
+      <p>Меняйте товары прямо здесь. Сохранение пишет в GitHub — сайт на Netlify обновится сам.</p>
+    </div>
+
+    <section class="editor-card" data-auth-panel>
+      <h2>Доступ к сохранению</h2>
+      <p class="editor-hint">Один раз вставьте GitHub token с правом писать в репозиторий <code>samsara-store</code>. Он хранится только в вашем браузере.</p>
+      <ol class="editor-steps">
+        <li>Откройте <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">Fine-grained tokens</a></li>
+        <li>Generate → выберите только репозиторий <strong>samsara-store</strong></li>
+        <li>Permissions → Repository → Contents: <strong>Read and write</strong></li>
+        <li>Скопируйте token и вставьте ниже</li>
+      </ol>
+      <div class="form-group">
+        <label for="token">GitHub token</label>
+        <input class="form-control" id="token" type="password" placeholder="github_pat_..." autocomplete="off">
+      </div>
+      <button type="button" class="btn btn-primary" data-save-token>Сохранить token в браузере</button>
+      <p class="editor-status" data-auth-status></p>
+    </section>
+
+    <div class="editor-layout">
+      <aside class="editor-card editor-side">
+        <button type="button" class="btn btn-ghost btn-block" data-tab="settings">Настройки сайта</button>
+        <button type="button" class="btn btn-primary btn-block" data-new-product>+ Новый товар</button>
+        <div class="editor-product-list" data-product-list></div>
+      </aside>
+
+      <section class="editor-card editor-form-wrap">
+        <div data-panel="settings" class="is-hidden">
+          <h2>Настройки и категории</h2>
+          <div class="form-group"><label>Бренд</label><input class="form-control" name="brand"></div>
+          <div class="form-group"><label>Слоган</label><input class="form-control" name="tagline"></div>
+          <div class="form-group"><label>Текст на главной</label><textarea class="form-control" name="heroText" rows="3"></textarea></div>
+          <div class="form-group"><label>Email</label><input class="form-control" name="email"></div>
+          <div class="form-group"><label>Телефон</label><input class="form-control" name="phone"></div>
+          <div class="form-group"><label>Город</label><input class="form-control" name="city"></div>
+          <button type="button" class="btn btn-primary" data-save-settings>Сохранить настройки</button>
+          <p class="editor-status" data-settings-status></p>
+        </div>
+
+        <div data-panel="product">
+          <h2 data-product-heading>Товар</h2>
+          <div class="form-group"><label>ID</label><input class="form-control" name="id" placeholder="hat-wool"></div>
+          <div class="form-group">
+            <label>Категория</label>
+            <select class="form-control" name="category">
+              <option value="boots">Ботинки</option>
+              <option value="hat">Шапка</option>
+              <option value="sweater">Кофта</option>
+              <option value="jacket">Куртка</option>
+              <option value="gloves">Перчатки</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Название</label><input class="form-control" name="name"></div>
+          <div class="form-group"><label>Цена (₴)</label><input class="form-control" name="price" type="number" min="0" step="1"></div>
+          <div class="form-group"><label>Описание</label><textarea class="form-control" name="description" rows="4"></textarea></div>
+          <div class="form-group"><label>Размеры через запятую</label><input class="form-control" name="sizes" placeholder="S, M, L"></div>
+          <div class="form-group"><label>Главное фото (путь)</label><input class="form-control" name="image" placeholder="media/products/hat-wool.jpg"></div>
+          <div class="form-group"><label>Цвета (каждый с новой строки: путь | подпись)</label><textarea class="form-control" name="images" rows="4" placeholder="media/products/hat-wool.jpg | Чёрная"></textarea></div>
+          <div class="editor-actions">
+            <button type="button" class="btn btn-primary" data-save-product>Сохранить товар</button>
+            <button type="button" class="btn btn-danger" data-delete-product>Удалить</button>
+          </div>
+          <p class="editor-status" data-product-status></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/editor.js"></script>
+</body>
+</html>

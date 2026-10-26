@@ -1,0 +1,148 @@
+.editor-body {
+  background:
+    radial-gradient(ellipse 70% 40% at 10% 0%, rgba(196, 163, 90, 0.1), transparent 50%),
+    var(--bg);
+}
+
+.editor-main {
+  padding: 2rem 0 4rem;
+}
+
+.editor-hero {
+  margin-bottom: 1.5rem;
+  max-width: 40rem;
+}
+
+.editor-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: 0.5rem;
+}
+
+.editor-hero p,
+.editor-hint,
+.editor-steps {
+  color: var(--text-muted);
+}
+
+.editor-card {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+  margin-bottom: 1rem;
+}
+
+.editor-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.editor-side .btn {
+  margin-bottom: 0.65rem;
+}
+
+.editor-product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.editor-product-list button {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.8rem;
+  cursor: pointer;
+}
+
+.editor-product-list button.is-active,
+.editor-product-list button:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.editor-product-list small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+.editor-status {
+  min-height: 1.4rem;
+  margin-top: 0.75rem;
+  color: var(--accent-soft);
+}
+
+.editor-steps {
+  margin: 0.75rem 0 1rem 1.1rem;
+}
+
+.editor-steps li {
+  margin-bottom: 0.35rem;
+}
+
+.editor-form-wrap textarea.form-control {
+  resize: vertical;
+}
+
+.edit-fab {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.85rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1a160c;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s var(--ease), background 0.25s;
+}
+
+.edit-fab:hover {
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.inline-edit-link {
+  display: inline-flex;
+  margin-top: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.inline-edit-link:hover {
+  color: var(--accent-soft);
+}
+
+@media (max-width: 860px) {
+  .editor-layout {
+    grid-template-columns: 1fr;
+  }
+}
