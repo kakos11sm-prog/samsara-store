@@ -285,6 +285,8 @@
 
 .ve-field-block .product-desc {
   flex: 1;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .ve-icon-btn,

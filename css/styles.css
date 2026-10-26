@@ -806,6 +806,8 @@ ul {
 .product-desc {
   color: var(--text-muted);
   margin-bottom: 1.75rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .form-group {

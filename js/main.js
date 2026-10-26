@@ -13,6 +13,14 @@
     return new URLSearchParams(window.location.search).get(name);
   }
 
+  function escapeHtml(text) {
+    return String(text == null ? '' : text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
   function getProductImages(product) {
     if (product.images && product.images.length) {
       return product.images.map(function (item) {
@@ -463,7 +471,7 @@
       store.formatPrice(product.price) +
       '</div>' +
       '<p class="product-desc">' +
-      product.description +
+      escapeHtml(product.description) +
       '</p>' +
       '<form data-add-form>' +
       colorsHtml +
