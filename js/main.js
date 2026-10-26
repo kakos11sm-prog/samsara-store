@@ -473,6 +473,20 @@
       '<p class="product-desc">' +
       escapeHtml(product.description) +
       '</p>' +
+      (product.manufacturer || product.material
+        ? '<div class="product-meta">' +
+          (product.manufacturer
+            ? '<div class="product-meta-row"><span>Производитель</span><strong>' +
+              escapeHtml(product.manufacturer) +
+              '</strong></div>'
+            : '') +
+          (product.material
+            ? '<div class="product-meta-row"><span>Материал</span><strong>' +
+              escapeHtml(product.material) +
+              '</strong></div>'
+            : '') +
+          '</div>'
+        : '') +
       '<form data-add-form>' +
       colorsHtml +
       '<div class="form-group">' +

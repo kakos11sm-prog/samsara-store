@@ -54,6 +54,8 @@ collections:
               - { label: Название, name: name, widget: string }
               - { label: Цена (₴), name: price, widget: number, value_type: int }
               - { label: Описание, name: description, widget: text }
+              - { label: Производитель, name: manufacturer, widget: string, required: false }
+              - { label: Материал, name: material, widget: string, required: false }
               - label: Размеры
                 name: sizes
                 widget: list

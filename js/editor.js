@@ -84,11 +84,41 @@
       name: 'Новый товар',
       price: 0,
       description: 'Добавьте описание',
+      manufacturer: '',
+      material: '',
       sizes: ['M'],
       symbol: '',
       image: '',
       images: []
     };
+  }
+
+  function metaRowHtml(label, field, value) {
+    var hasValue = Boolean(value && String(value).trim());
+    return (
+      '<div class="ve-meta-row">' +
+      '<div class="ve-meta-text">' +
+      '<span class="ve-meta-label">' +
+      label +
+      '</span>' +
+      '<span class="ve-meta-value">' +
+      (hasValue ? escapeHtml(value) : 'Не указано') +
+      '</span>' +
+      '</div>' +
+      '<div class="ve-meta-actions">' +
+      (hasValue
+        ? '<button type="button" class="ve-icon-btn" data-ve-edit-field="' +
+          field +
+          '" title="Изменить">✎</button>' +
+          '<button type="button" class="ve-icon-btn ve-icon-danger" data-ve-clear-field="' +
+          field +
+          '" title="Убрать">×</button>'
+        : '<button type="button" class="ve-plus" data-ve-edit-field="' +
+          field +
+          '" title="Добавить">+</button>') +
+      '</div>' +
+      '</div>'
+    );
   }
 
   function getImages(product) {
@@ -295,6 +325,10 @@
       '</p>' +
       '<button type="button" class="ve-icon-btn" data-ve-edit-field="description" title="Изменить описание">✎</button>' +
       '</div>' +
+      '<div class="ve-meta-list">' +
+      metaRowHtml('Производитель', 'manufacturer', product.manufacturer) +
+      metaRowHtml('Материал', 'material', product.material) +
+      '</div>' +
       '<div class="form-group">' +
       '<div class="ve-label-row"><label>Цвет / фото</label>' +
       '<button type="button" class="ve-plus" data-ve-add-image title="Добавить фото">+</button></div>' +
@@ -372,9 +406,12 @@
     var labels = {
       name: 'Название',
       price: 'Цена (₴)',
-      description: 'Описание'
+      description: 'Описание',
+      manufacturer: 'Производитель',
+      material: 'Материал'
     };
     var isArea = field === 'description';
+    var canClear = field === 'manufacturer' || field === 'material';
     openModal({
       title: labels[field] || 'Изменить',
       bodyHtml:
@@ -387,14 +424,27 @@
             (field === 'price' ? 'number' : 'text') +
             '" value="' +
             escapeHtml(product[field] || '') +
+            '" placeholder="' +
+            (field === 'manufacturer'
+              ? 'Например: Samsara Atelier'
+              : field === 'material'
+                ? 'Например: натуральная кожа'
+                : '') +
             '">') +
         '</div>',
       onOk: function () {
         var value = qs('[data-ve-input]').value.trim();
         if (field === 'price') product.price = Number(value) || 0;
+        else if (canClear) product[field] = value;
         else product[field] = value || product[field];
         applyDraftChange();
-      }
+      },
+      onDelete: canClear
+        ? function () {
+            product[field] = '';
+            applyDraftChange();
+          }
+        : null
     });
   }
 
@@ -478,6 +528,16 @@
         return;
       }
 
+      var clearField = event.target.closest('[data-ve-clear-field]');
+      if (clearField) {
+        var clearName = clearField.getAttribute('data-ve-clear-field');
+        if (state.draft) {
+          state.draft[clearName] = '';
+          applyDraftChange();
+        }
+        return;
+      }
+
       var selectImage = event.target.closest('[data-ve-select-image]');
       if (selectImage && !event.target.closest('.ve-icon-btn')) {
         state.activeImage = Number(selectImage.getAttribute('data-ve-select-image'));
@@ -538,6 +598,8 @@
     state.activeImage = 0;
     if (!state.draft.sizes) state.draft.sizes = [];
     if (!state.draft.images) state.draft.images = [];
+    if (!state.draft.manufacturer) state.draft.manufacturer = '';
+    if (!state.draft.material) state.draft.material = '';
     renderVisualEditor();
   }
 

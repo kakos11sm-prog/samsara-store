@@ -806,9 +806,34 @@ ul {
 
 .product-desc {
   color: var(--text-muted);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+.product-meta {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1.75rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.product-meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.95rem;
+}
+
+.product-meta-row span {
+  color: var(--text-muted);
+}
+
+.product-meta-row strong {
+  font-weight: 600;
+  text-align: right;
 }
 
 .form-group {

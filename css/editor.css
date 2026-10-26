@@ -354,6 +354,45 @@
   font-size: 0.9rem;
 }
 
+.ve-meta-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.ve-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.ve-meta-text {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.ve-meta-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ve-meta-value {
+  color: var(--text);
+}
+
+.ve-meta-actions {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
 .ve-modal {
   position: fixed;
   inset: 0;
