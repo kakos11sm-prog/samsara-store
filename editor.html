@@ -21,7 +21,7 @@
   <main class="editor-main container">
     <div class="editor-hero">
       <h1>Редактор магазина</h1>
-      <p>Слева выберите товар → справа измените → нажмите «Сохранить». Через 1–2 минуты изменения появятся на сайте.</p>
+      <p>Слева выберите товар. Справа — такая же карточка, как на сайте: карандаш правит текст, плюс добавляет фото или размер. Изменения видны сразу.</p>
     </div>
 
     <section class="editor-card editor-auth" data-auth-panel>
@@ -30,12 +30,12 @@
         <span class="editor-auth-chevron">▾</span>
       </button>
       <div class="editor-auth-body" data-auth-body>
-        <p class="editor-hint">Это пароль для сохранения. Хранится только в вашем браузере, на сайт его никто не видит.</p>
+        <p class="editor-hint">Нужен, чтобы сохранить правки на сайт. Хранится только в вашем браузере.</p>
         <div class="editor-howto">
           <p><strong>Как получить ключ:</strong></p>
           <ol class="editor-steps">
             <li>Откройте <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">страницу токенов GitHub</a></li>
-            <li>Создайте токен → репозиторий <strong>samsara-store</strong></li>
+            <li>Репозиторий <strong>samsara-store</strong></li>
             <li>Право <strong>Contents → Read and write</strong></li>
             <li>Скопируйте и вставьте сюда</li>
           </ol>
@@ -43,7 +43,6 @@
         <div class="form-group">
           <label for="token">Вставьте ключ сюда</label>
           <input class="form-control" id="token" type="password" placeholder="начинается с github_pat_..." autocomplete="off">
-          <p class="field-hint">Не отправляйте ключ никому и не вставляйте его в чат.</p>
         </div>
         <button type="button" class="btn btn-primary" data-save-token>Запомнить ключ</button>
         <button type="button" class="btn btn-ghost" data-clear-token>Удалить ключ из браузера</button>
@@ -64,95 +63,77 @@
         <div data-panel="settings" class="is-hidden">
           <h2>Текст на сайте</h2>
           <p class="editor-hint">Эти поля видны посетителям на главной и в подвале.</p>
-
           <div class="form-group">
             <label>Название магазина</label>
             <input class="form-control" name="brand" placeholder="Сансара">
-            <p class="field-hint">Крупная надпись в шапке и на главном экране.</p>
           </div>
           <div class="form-group">
             <label>Короткий слоган</label>
             <input class="form-control" name="tagline" placeholder="Одежда для нового круга">
-            <p class="field-hint">Строка под названием на главной.</p>
           </div>
           <div class="form-group">
             <label>Описание на главной</label>
-            <textarea class="form-control" name="heroText" rows="3" placeholder="Несколько предложений о магазине"></textarea>
+            <textarea class="form-control" name="heroText" rows="3"></textarea>
           </div>
           <div class="form-group">
-            <label>Email для связи</label>
-            <input class="form-control" name="email" placeholder="hello@samsara.store">
+            <label>Email</label>
+            <input class="form-control" name="email">
           </div>
           <div class="form-group">
             <label>Телефон</label>
-            <input class="form-control" name="phone" placeholder="+380...">
+            <input class="form-control" name="phone">
           </div>
           <div class="form-group">
             <label>Город / адрес</label>
-            <input class="form-control" name="city" placeholder="Киев · онлайн">
+            <input class="form-control" name="city">
           </div>
-
           <button type="button" class="btn btn-primary" data-save-settings>Сохранить текст сайта</button>
           <p class="editor-status" data-settings-status></p>
         </div>
 
         <div data-panel="product">
-          <h2 data-product-heading>Карточка товара</h2>
-          <p class="editor-hint">Заполните поля как в обычной витрине. Фото кладите в папку <code>media/products</code> на GitHub, сюда пишите путь к файлу.</p>
-
-          <div class="form-group">
-            <label>Код товара (латиницей)</label>
-            <input class="form-control" name="id" placeholder="hat-wool">
-            <p class="field-hint">Например: <code>hat-wool</code>. После создания менять нельзя.</p>
+          <div class="ve-toolbar">
+            <div class="ve-toolbar-left">
+              <label class="ve-mini-label">Раздел</label>
+              <select class="form-control ve-select" name="category" data-ve-category>
+                <option value="boots">Ботинки</option>
+                <option value="hat">Шапка</option>
+                <option value="sweater">Кофта</option>
+                <option value="jacket">Куртка</option>
+                <option value="gloves">Перчатки</option>
+              </select>
+              <label class="ve-mini-label">Код</label>
+              <input class="form-control ve-id" name="id" data-ve-id placeholder="hat-wool">
+            </div>
+            <div class="ve-toolbar-right">
+              <button type="button" class="btn btn-primary" data-save-product>Сохранить на сайт</button>
+              <a class="btn btn-ghost" data-preview-product href="index.html" target="_blank" rel="noopener">Открыть на сайте</a>
+              <button type="button" class="btn btn-danger" data-delete-product>Удалить</button>
+            </div>
           </div>
-          <div class="form-group">
-            <label>Раздел каталога</label>
-            <select class="form-control" name="category">
-              <option value="boots">Ботинки</option>
-              <option value="hat">Шапка</option>
-              <option value="sweater">Кофта</option>
-              <option value="jacket">Куртка</option>
-              <option value="gloves">Перчатки</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Название для покупателя</label>
-            <input class="form-control" name="name" placeholder="Wool Orbit">
-          </div>
-          <div class="form-group">
-            <label>Цена в гривнах</label>
-            <input class="form-control" name="price" type="number" min="0" step="1" placeholder="890">
-          </div>
-          <div class="form-group">
-            <label>Описание</label>
-            <textarea class="form-control" name="description" rows="4" placeholder="Коротко, что это за вещь и кому подойдёт"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Размеры</label>
-            <input class="form-control" name="sizes" placeholder="S, M, L">
-            <p class="field-hint">Пишите через запятую. Пример: <code>S, M, L</code> или <code>39, 40, 41</code></p>
-          </div>
-          <div class="form-group">
-            <label>Главное фото</label>
-            <input class="form-control" name="image" placeholder="media/products/hat-wool.jpg">
-            <p class="field-hint">Путь к файлу, например: <code>media/products/hat-wool.jpg</code></p>
-          </div>
-          <div class="form-group">
-            <label>Другие цвета / фото</label>
-            <textarea class="form-control" name="images" rows="4" placeholder="media/products/hat-wool.jpg | Чёрная&#10;media/products/hat-wool-green.jpg | Зелёная"></textarea>
-            <p class="field-hint">Каждый цвет с новой строки: <code>путь_к_фото | Название цвета</code></p>
-          </div>
-
-          <div class="editor-actions">
-            <button type="button" class="btn btn-primary" data-save-product>Сохранить товар</button>
-            <a class="btn btn-ghost" data-preview-product href="index.html" target="_blank" rel="noopener">Открыть на сайте</a>
-            <button type="button" class="btn btn-danger" data-delete-product>Удалить товар</button>
-          </div>
+          <p class="editor-hint ve-legend">
+            <span>✎ карандаш — изменить</span>
+            <span>+ плюс — добавить</span>
+            <span>× — удалить</span>
+          </p>
+          <div class="product-detail ve-canvas" data-visual-editor></div>
           <p class="editor-status" data-product-status></p>
         </div>
       </section>
     </div>
   </main>
+
+  <div class="ve-modal is-hidden" data-ve-modal>
+    <div class="ve-modal-card">
+      <h3 data-ve-modal-title>Изменить</h3>
+      <div data-ve-modal-body></div>
+      <div class="ve-modal-actions">
+        <button type="button" class="btn btn-primary" data-ve-modal-ok>Готово</button>
+        <button type="button" class="btn btn-ghost" data-ve-modal-cancel>Отмена</button>
+        <button type="button" class="btn btn-danger is-hidden" data-ve-modal-delete>Удалить</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/editor.js"></script>
 </body>

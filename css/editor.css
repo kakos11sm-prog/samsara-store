@@ -190,6 +190,203 @@
   margin-left: 0.5rem;
 }
 
+.ve-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.ve-toolbar-left,
+.ve-toolbar-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.ve-mini-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ve-select {
+  width: auto;
+  min-width: 8rem;
+}
+
+.ve-id {
+  width: 9rem;
+}
+
+.ve-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.ve-canvas {
+  padding: 0.25rem 0 0.5rem;
+}
+
+.ve-gallery {
+  position: relative;
+}
+
+.ve-fab {
+  position: absolute;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1a160c;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.ve-fab-edit {
+  right: 0.85rem;
+  bottom: 0.85rem;
+}
+
+.ve-fab-add {
+  right: 0.85rem;
+  bottom: 3.5rem;
+}
+
+.ve-field {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-bottom: 0.55rem;
+}
+
+.ve-field h1,
+.ve-field .product-price,
+.ve-field .product-card-cat,
+.ve-field .product-desc {
+  margin: 0;
+}
+
+.ve-field-block {
+  align-items: stretch;
+}
+
+.ve-field-block .product-desc {
+  flex: 1;
+}
+
+.ve-icon-btn,
+.ve-plus {
+  flex: 0 0 auto;
+  width: 1.85rem;
+  height: 1.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(18, 20, 16, 0.75);
+  color: var(--accent-soft);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.ve-icon-btn:hover,
+.ve-plus:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.ve-icon-danger {
+  color: var(--danger);
+}
+
+.ve-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.ve-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.ve-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-height: 2.5rem;
+  padding: 0.2rem 0.35rem 0.2rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  cursor: pointer;
+}
+
+.ve-chip.is-active {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+
+.ve-chip .ve-icon-btn {
+  width: 1.55rem;
+  height: 1.55rem;
+  font-size: 0.85rem;
+}
+
+.ve-empty {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.ve-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(8, 10, 6, 0.72);
+}
+
+.ve-modal.is-hidden {
+  display: none;
+}
+
+.ve-modal-card {
+  width: min(420px, 100%);
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-elevated);
+}
+
+.ve-modal-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.ve-modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
 @media (max-width: 860px) {
   .editor-layout {
     grid-template-columns: 1fr;
@@ -198,5 +395,10 @@
   .editor-auth .btn-ghost {
     margin-left: 0;
     margin-top: 0.5rem;
+  }
+
+  .ve-toolbar {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
