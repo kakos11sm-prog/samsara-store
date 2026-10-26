@@ -62,7 +62,8 @@ a {
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
   color: inherit;
 }
@@ -830,9 +831,16 @@ ul {
   padding: 0.65rem 0.9rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--bg-elevated);
+  background: var(--bg-soft);
+  color: var(--text);
+  caret-color: var(--accent);
   outline: none;
   transition: border-color 0.25s var(--ease);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
 }
 
 .form-control:focus {
